@@ -162,8 +162,8 @@ public class Terminal {
             let resultString = try executeControlSequenceWithResponse(ANSIEscapeCode.textAreaSize)
             let items = resultString.strippingCSI().split(separator: ";").map{$0.trimmingCharacters(in:.letters)}.map{Int($0)}.filter({$0 != nil})
             if items.count == 3,
-               let width = items[2],
-               let height = items[1] {
+               let width = items[1],
+               let height = items[2] {
                 return (width: width, height: height)
             } else {
                 throw TerminalError.failedToParseTerminalResponse(message: "Unable to parse respone for text area size control sequence. Response: \(resultString)")
